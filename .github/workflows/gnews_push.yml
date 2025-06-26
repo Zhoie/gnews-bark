@@ -1,0 +1,30 @@
+name: 📰 Bark GNews Push
+
+permissions:
+  contents: read
+
+on:
+  # UTC 00:00 与 12:00，对应北京时间 08:00 与 20:00
+  schedule:
+    - cron: '0 0 * * *'
+    - cron: '0 12 * * *'
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔧 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: pip install requests python-dateutil
+
+      - name: 🚀 Fetch news & push via Bark
+        env:
+          GNEWS_TOKEN: ${{ secrets.GNEWS_TOKEN }}
+          BARK_KEY:    ${{ secrets.BARK_KEY }}
+        run: python scripts/gnews_pusher.py
