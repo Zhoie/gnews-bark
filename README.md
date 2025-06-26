@@ -2,10 +2,6 @@
 
 Automated workflow that fetches top headlines from **GNews** and sends them to your iPhone via **Bark**, powered by GitHub Actions.
 
-## Structure
-.github/workflows/gnews_push.yml
-scripts/gnews_pusher.py
-
 ## Setup
 1. Register at <https://gnews.io> and copy your API key.  
 2. Install Bark on iOS (<https://day.app>) and copy your device key.  
